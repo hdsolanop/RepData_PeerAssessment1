@@ -52,7 +52,7 @@ activity <- read_csv("activity.csv")
 
 ```r
 temp <- activity %>% group_by(date) %>% summarise(steps.per.day = sum(steps,na.rm = TRUE))
-ggplot(data = temp) + geom_histogram(aes(x =steps.per.day))
+ggplot(data = temp) + geom_histogram(aes(x =steps.per.day)) + labs(title = "Histogram of Steps per day") + xlab("Number of steps per day")
 ```
 
 ```
@@ -127,7 +127,7 @@ activity2 <- bind_rows(activity2,missing.val)
 temp <- activity2 %>% group_by(date) %>% summarise(steps.per.day = sum(steps))
 mean2 <- mean(temp$steps.per.day)
 median2 <- median(temp$steps.per.day)
-ggplot(data = temp) + geom_histogram(aes(x =steps.per.day))
+ggplot(data = temp) + geom_histogram(aes(x =steps.per.day)) + labs(title = "Histogram of Steps per day without NAs") + xlab("Number of Steps per day")
 ```
 
 ```
@@ -144,13 +144,14 @@ The mean total number of steps per day is 1.076619\times 10^{4} and the median t
 
 
 ```r
-temp <- activity2 %>% mutate(weekday = weekdays(date)) %>% mutate(day.type = case_when(weekday == "Monday" ~ "weekday",
-                                                                                       weekday == "Tuesday" ~ "weekday",
-                                                                                       weekday == "Wednesday" ~ "weekday",
-                                                                                       weekday == "Thursday" ~ "weekday",
-                                                                                       weekday == "Friday" ~ "weekday",
-                                                                                       weekday == "Saturday" ~ "weekend",
-                                                                                       weekday == "Sunday" ~ "weekend")) %>%
+temp <- activity2 %>% mutate(weekday = weekdays(date)) %>% 
+                        mutate(day.type = case_when(    weekday == "Monday" ~ "weekday",
+                                                        weekday == "Tuesday" ~ "weekday",
+                                                        weekday == "Wednesday" ~ "weekday",
+                                                        weekday == "Thursday" ~ "weekday",
+                                                        weekday == "Friday" ~ "weekday",
+                                                        weekday == "Saturday" ~ "weekend",
+                                                        weekday == "Sunday" ~ "weekend")) %>%
                         group_by(interval,day.type) %>% summarise(mean.steps.per.interval = sum(steps))
 ```
 
@@ -158,7 +159,7 @@ temp <- activity2 %>% mutate(weekday = weekdays(date)) %>% mutate(day.type = cas
 
 
 ```r
-ggplot(data = temp) + geom_line(aes(x = interval, y =mean.steps.per.interval)) + facet_wrap(~day.type,nrow = 2) 
+ggplot(data = temp) + geom_line(aes(x = interval, y =mean.steps.per.interval)) + facet_wrap(~day.type,nrow = 2) + labs(title = "Mean number of steps per interval") + ylab("Number of steps")
 ```
 
 ![](PA1_template_files/figure-html/plot3-1.png)<!-- -->
