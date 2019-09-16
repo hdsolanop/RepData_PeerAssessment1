@@ -1,4 +1,9 @@
-# Reproducible Research: Peer Assessment 1
+---
+title: "Reproducible Research: Peer Assessment 1"
+output: 
+  html_document:
+    keep_md: true
+---
 
 
 ## Loading and preprocessing the data
@@ -13,21 +18,20 @@ library(tidyverse)
 ```
 
 ```
-## Loading tidyverse: ggplot2
-## Loading tidyverse: tibble
-## Loading tidyverse: tidyr
-## Loading tidyverse: readr
-## Loading tidyverse: purrr
-## Loading tidyverse: dplyr
+## -- Attaching packages ------------------------------------------- tidyverse 1.2.1 --
 ```
 
 ```
-## Conflicts with tidy packages ----------------------------------------------
+## v ggplot2 3.2.1     v purrr   0.3.2
+## v tibble  2.1.3     v dplyr   0.8.3
+## v tidyr   0.8.3     v stringr 1.4.0
+## v readr   1.3.1     v forcats 0.4.0
 ```
 
 ```
-## filter(): dplyr, stats
-## lag():    dplyr, stats
+## -- Conflicts ---------------------------------------------- tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
 ```
 
 ```r
@@ -38,9 +42,9 @@ activity <- read_csv("activity.csv")
 ```
 ## Parsed with column specification:
 ## cols(
-##   steps = col_integer(),
+##   steps = col_double(),
 ##   date = col_date(format = ""),
-##   interval = col_integer()
+##   interval = col_double()
 ## )
 ```
 
